@@ -92,7 +92,7 @@ h6 {
 }
 
 .logo img {
-    height: 60px;
+    height: 80px;
     /* Adjust height to fit navbar */
     width: auto;
     object-fit: contain;
@@ -129,6 +129,7 @@ h6 {
 .hero {
     min-height: 100vh;
     display: flex;
+    flex-direction: row-reverse;
     align-items: center;
     justify-content: space-between;
     padding: 0 4% 0 2%;
@@ -148,34 +149,35 @@ h6 {
 .hero-fullcenter {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: flex-end;
     justify-content: center;
     width: 100%;
     max-width: 1100px;
     padding-left: 2%;
+    padding-top: 8rem;
 }
 
 .hero-title {
     font-family: 'Inter', sans-serif;
-    font-size: clamp(1.8rem, 3.5vw, 3.8rem);
-    line-height: 1.15;
+    font-size: clamp(4.5rem, 9vw, 10rem);
+    line-height: 0.95;
     margin-bottom: 0;
     font-weight: 900;
     letter-spacing: -0.04em;
     color: #D4A674;
     opacity: 1;
     transform: none;
-    text-align: left;
+    text-align: right;
     white-space: normal;
+    position: relative;
+    min-height: 3em;
 }
 
 .hero-line {
-    display: block;
-    width: 100%;
-    line-height: 1.15;
-    white-space: nowrap;
+    position: absolute;
+    top: 0;
+    right: 0;
     opacity: 0;
-    transform: translateX(100px);
     will-change: transform, opacity;
 }
 
@@ -419,6 +421,7 @@ h6 {
     align-items: center;
     justify-content: center;
     perspective: 1200px;
+    padding-top: 15rem;
 }
 
 .laptop-scene {
@@ -575,6 +578,168 @@ h6 {
 
 .chart-bar:nth-child(5) {
     --delay: 2.4s;
+}
+
+/* ── Financial Chart Screen ── */
+.sc-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 4px;
+}
+
+.sc-ticker {
+    font-size: 8px;
+    color: rgba(255, 255, 255, 0.65);
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+.sc-live {
+    font-size: 7px;
+    color: #6DBF8A;
+    font-weight: 700;
+    animation: livePulse 1.5s ease-in-out infinite;
+}
+
+@keyframes livePulse {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.25;
+    }
+}
+
+.sc-price {
+    display: flex;
+    align-items: baseline;
+    gap: 7px;
+    margin-bottom: 6px;
+}
+
+.sc-val {
+    font-size: 15px;
+    font-weight: 800;
+    color: rgba(255, 255, 255, 0.92);
+    letter-spacing: -0.03em;
+}
+
+.sc-change {
+    font-size: 9px;
+    color: #6DBF8A;
+    font-weight: 700;
+}
+
+.sc-chart-wrap {
+    flex: 1;
+    min-height: 0;
+    margin-bottom: 6px;
+}
+
+.sc-svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.sc-area {
+    fill: url(#chartGrad);
+}
+
+.sc-line {
+    fill: none;
+    stroke: #D4A674;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-dasharray: 600;
+    stroke-dashoffset: 600;
+    transition: stroke-dashoffset 2.2s ease 1.8s;
+}
+
+.laptop-lid.open .sc-line {
+    stroke-dashoffset: 0;
+}
+
+.sc-dot {
+    fill: #D4A674;
+    opacity: 0;
+    transition: opacity 0.4s ease 4s;
+}
+
+.laptop-lid.open .sc-dot {
+    opacity: 1;
+}
+
+.sc-dot-ring {
+    fill: none;
+    stroke: #D4A674;
+    stroke-width: 1.2;
+    opacity: 0;
+    transition: opacity 0.4s ease 4s;
+    animation: dotRing 1.8s ease-in-out infinite;
+}
+
+.laptop-lid.open .sc-dot-ring {
+    opacity: 0.5;
+}
+
+@keyframes dotRing {
+    0% {
+        r: 5;
+        opacity: 0.5;
+    }
+
+    100% {
+        r: 10;
+        opacity: 0;
+    }
+}
+
+.sc-stats {
+    display: flex;
+    border-top: 1px solid rgba(255, 255, 255, 0.07);
+    padding-top: 5px;
+    gap: 0;
+}
+
+.sc-stat {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: 0 6px;
+    border-right: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.sc-stat:first-child {
+    padding-left: 0;
+}
+
+.sc-stat:last-child {
+    border-right: none;
+}
+
+.sc-stat-l {
+    font-size: 6.5px;
+    color: rgba(255, 255, 255, 0.3);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+.sc-stat-v {
+    font-size: 10px;
+    color: rgba(255, 255, 255, 0.75);
+    font-weight: 700;
+}
+
+.sc-low {
+    color: #6DBF8A !important;
 }
 
 /* Screen reflection */

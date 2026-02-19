@@ -28,28 +28,53 @@ tl.to('body', {
   duration: 1.5,
   ease: 'power2.out'
 })
-  .fromTo('.hero-line',
-    { opacity: 0, x: 100 },
-    {
-      opacity: 1,
-      x: 0,
-      duration: 1.0,
-      ease: 'power3.out',
-      stagger: 0.30
-    }, '-=1'
-  )
-  .to('.hero-subtitle', {
-    opacity: 1,
-    y: 0,
-    duration: 1,
-    ease: 'power3.out'
-  }, '-=0.8')
+  ;
+
+// ── Cinematic Hero Title Reveal ──
+const heroLines = gsap.utils.toArray('.hero-line');
+if (heroLines.length === 3) {
+  gsap.timeline({ repeat: -1, repeatDelay: 0.5, delay: 0.8 })
+
+    // Line 1: slide in from RIGHT → hold → fade out left
+    .fromTo(heroLines[0],
+      { opacity: 0, x: 90 },
+      { opacity: 1, x: 0, duration: 0.9, ease: 'power3.out' }
+    )
+    .to(heroLines[0],
+      { opacity: 0, x: -50, duration: 0.7, ease: 'power2.in' }, '+=0.8'
+    )
+
+    // Line 2: slide in from RIGHT → hold → fade out left
+    .fromTo(heroLines[1],
+      { opacity: 0, x: 90 },
+      { opacity: 1, x: 0, duration: 0.9, ease: 'power3.out' }
+    )
+    .to(heroLines[1],
+      { opacity: 0, x: -50, duration: 0.7, ease: 'power2.in' }, '+=0.8'
+    )
+
+    // Line 3: slide in from LEFT → hold → fade out right (to clear for Line 1)
+    .fromTo(heroLines[2],
+      { opacity: 0, x: -90 },
+      { opacity: 1, x: 0, duration: 1.1, ease: 'power3.out' }
+    )
+    .to(heroLines[2],
+      { opacity: 0, x: 50, duration: 0.7, ease: 'power2.in' }, '+=0.8'
+    );
+}
+
+tl.to('.hero-subtitle', {
+  opacity: 1,
+  y: 0,
+  duration: 1,
+  ease: 'power3.out'
+})
   .to('.hero-cta', {
     opacity: 1,
     y: 0,
     duration: 1,
     ease: 'power3.out'
-  }, '-=0.8');
+  });
 
 // ── Hero Card 3D Tilt ──
 const heroCardWrap = document.getElementById('heroCardWrap');
