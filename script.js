@@ -17,6 +17,14 @@ function raf(time) {
 
 requestAnimationFrame(raf);
 
+// Smooth scroll for anchor links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function (e) {
+    e.preventDefault();
+    lenis.scrollTo(this.getAttribute('href'));
+  });
+});
+
 // GSAP Plugins
 gsap.registerPlugin(ScrollTrigger);
 
@@ -221,15 +229,18 @@ if (laptopScene && laptop) {
 }
 
 
-gsap.to('.bg-text', {
-  yPercent: 50,
-  ease: 'none',
-  scrollTrigger: {
-    trigger: '.architecture',
-    start: 'top bottom',
-    end: 'bottom top',
-    scrub: true
-  }
+const bgTexts = document.querySelectorAll('.bg-text');
+bgTexts.forEach(bg => {
+  gsap.to(bg, {
+    y: 180,
+    ease: 'none',
+    scrollTrigger: {
+      trigger: bg.parentElement,
+      start: 'top bottom',
+      end: 'bottom top',
+      scrub: true
+    }
+  });
 });
 
 // Horizontal Scroll Section

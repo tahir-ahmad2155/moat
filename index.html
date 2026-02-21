@@ -27,13 +27,15 @@
     <nav class="nav">
         <div class="nav-container">
             <div class="logo">
-                <img src="assets/MOAT Logo.png" alt="MOAT">
+                <a href="#hero">
+                    <img src="assets/MOAT Logo.png" alt="MOAT">
+                </a>
             </div>
             <div class="nav-links">
                 <a href="#performance">Performance</a>
                 <a href="#intelligence">Intelligence</a>
                 <a href="#architecture">Architecture</a>
-                <a href="#contact" class="nav-cta">Contact</a>
+                <a href="#final" class="nav-cta">Contact</a>
             </div>
         </div>
     </nav>
@@ -56,7 +58,6 @@
             <div class="hero-card-tilt" id="heroCardTilt">
                 <img src="assets/American Card.png" alt="American Card" class="hero-card-img" />
                 <div class="card-glow"></div>
-                <div class="card-reflection"></div>
             </div>
         </div>
 
@@ -64,14 +65,16 @@
 
     <!-- Performance Section -->
     <section class="performance" id="performance">
+        <div class="bg-text">PERFORMANCE</div>
         <div class="perf-particles" id="perfParticles"></div>
+        <span class="section-label">Performance</span>
         <div class="container perf-layout">
 
             <!-- Left: Text -->
             <div class="perf-text">
                 <h2 class="section-title fade-in-text">
                     <span class="title-dark">Power.</span>
-                    <span class="title-muted">Refined.</span>
+                    <span class="title-muted" style="color: var(--text-gold);">Refined.</span>
                 </h2>
                 <div class="stats-grid">
                     <div class="stat-card float-card">
@@ -166,10 +169,11 @@
 
     <!-- Intelligence Section -->
     <section class="intelligence" id="intelligence">
+        <div class="bg-text">INTELLIGENCE</div>
         <div class="container split-layout">
             <div class="content-left">
                 <span class="section-label">Intelligence</span>
-                <h2 class="section-title">Built to<br>Think Ahead.</h2>
+                <h2 class="section-title">Built to<br>Think <span style="color: var(--text-gold);">Ahead.</span></h2>
                 <p class="section-desc">Every decision powered by deep analysis, real-time insight, and adaptive
                     intelligence — so you're always one step ahead.</p>
                 <ul class="feature-list">
@@ -280,29 +284,55 @@
             </div>
         </div>
     </section>
-
-    <!-- Final Section -->
-    <section class="final" id="final">
-        <div class="final-content">
-            <span class="section-label light">The Future of Wealth</span>
-            <h2 class="final-title">Crafted for Those<br>Who Move Forward.</h2>
-            <p class="final-sub">Join the institutions redefining what's possible in wealth management.</p>
-            <div class="final-cta-group">
-                <button class="btn btn-primary large-btn">Request a Demo</button>
-                <button class="btn btn-outline large-btn">Learn More</button>
+    <!-- Footer Section -->
+    <footer class="site-footer" id="final">
+        <div class="footer-container">
+            <!-- Left Column -->
+            <div class="footer-col footer-about">
+                <a href="#hero" class="footer-logo-link">
+                    <img src="assets/MOAT Logo.png" alt="MOAT" class="footer-logo">
+                </a>
+                <p>Shaping future leaders through AI-powered institutional wealth management and agency-based training.
+                </p>
+                <div class="social-links">
+                    <a href="#">IG</a>
+                    <a href="#">FB</a>
+                    <a href="#">LN</a>
+                    <a href="#">YT</a>
+                </div>
             </div>
-            <div class="final-stats">
-                <div class="fstat"><span class="fstat-val">$2.4T+</span><span class="fstat-label">Assets Managed</span>
+
+            <!-- Middle Column -->
+            <div class="footer-col footer-links">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#performance">Performance</a></li>
+                    <li><a href="#intelligence">Intelligence</a></li>
+                    <li><a href="#architecture">Architecture</a></li>
+                </ul>
+            </div>
+
+            <!-- Right Column -->
+            <div class="footer-col footer-contact">
+                <h4>Get in Touch</h4>
+                <div class="contact-item">
+                    <strong>Address:</strong>
+                    <span>Karthika Tower, Attingal<br>New York, NY 10036</span>
                 </div>
-                <div class="fstat-divider"></div>
-                <div class="fstat"><span class="fstat-val">340+</span><span class="fstat-label">Institutions</span>
+                <div class="contact-item">
+                    <strong>Email:</strong>
+                    <a href="mailto:info@moatinstitute.in">info@moatinstitute.in</a>
                 </div>
-                <div class="fstat-divider"></div>
-                <div class="fstat"><span class="fstat-val">99.99%</span><span class="fstat-label">Uptime SLA</span>
+                <div class="contact-item">
+                    <strong>Phone:</strong>
+                    <a href="tel:+918590144794">+91 8590 144 794</a>
                 </div>
             </div>
         </div>
-    </section>
+        <div class="footer-bottom">
+            <p>&copy; 2026 MOAT Investments. All rights reserved.</p>
+        </div>
+    </footer>
 
     <!-- Scripts -->
     <!-- GSAP -->
