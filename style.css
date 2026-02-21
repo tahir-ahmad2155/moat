@@ -1556,4 +1556,39 @@ h6 {
     .footer-col h4 {
         margin-bottom: 1rem;
     }
+
+    /* Additional Mobile Centering & Alignment Fixes */
+    .hero,
+    .performance,
+    .intelligence,
+    .architecture {
+        padding: 5rem 5%;
+        overflow-x: hidden;
+    }
+
+    .hero-card-tilt {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+    }
+
+    .hero-card-img {
+        transform: translateX(0) scale(0.9);
+        width: 100%;
+        max-width: 280px;
+    }
+
+    .laptop-scene {
+        transform: scale(0.7);
+    }
+
+    .laptop-lid,
+    .laptop-base {
+        width: 100%;
+        max-width: 280px;
+    }
+
+    .arch-header {
+        text-align: left;
+    }
 }
