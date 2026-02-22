@@ -41,7 +41,7 @@ tl.to('body', {
 // ── Cinematic Hero Title Reveal ──
 const heroLines = gsap.utils.toArray('.hero-line');
 if (heroLines.length === 3) {
-  gsap.timeline({ repeat: -1, repeatDelay: 0.5, delay: 0.8 })
+  gsap.timeline({ delay: 0.8 }) // Removed repeat to stop on the last line
 
     // Line 1: slide in from RIGHT → hold → fade out left
     .fromTo(heroLines[0],
@@ -61,13 +61,10 @@ if (heroLines.length === 3) {
       { opacity: 0, x: -50, duration: 0.7, ease: 'power2.in' }, '+=0.8'
     )
 
-    // Line 3: slide in from LEFT → hold → fade out right (to clear for Line 1)
+    // Line 3: slide in from LEFT → hold (animation stops here, last text stays visible)
     .fromTo(heroLines[2],
       { opacity: 0, x: -90 },
       { opacity: 1, x: 0, duration: 1.1, ease: 'power3.out' }
-    )
-    .to(heroLines[2],
-      { opacity: 0, x: 50, duration: 0.7, ease: 'power2.in' }, '+=0.8'
     );
 }
 
@@ -99,9 +96,9 @@ mm.add("(max-width: 900px)", () => {
   const endElement = scroller.querySelector('.scroll-stack-end');
 
   // Configuration (matches user's screenshot proportions)
-  const itemDistance = 100;
+  let itemDistance = 100;
   const itemScale = 0.05;
-  const itemStackDistance = 45;
+  let itemStackDistance = 45;
   const baseScale = 0.80;
 
   let stackPositionPx;
@@ -111,8 +108,18 @@ mm.add("(max-width: 900px)", () => {
   const cardsData = [];
 
   function updateMetrics() {
-    stackPositionPx = scroller.clientHeight * 0.35;
-    scaleEndPositionPx = scroller.clientHeight * 0.25;
+    const isMobile = window.innerWidth <= 900;
+
+    itemDistance = isMobile ? 40 : 100;
+    itemStackDistance = isMobile ? 25 : 45;
+
+    stackPositionPx = scroller.clientHeight * (isMobile ? 0.10 : 0.35);
+    scaleEndPositionPx = scroller.clientHeight * (isMobile ? 0.02 : 0.25);
+
+    // Apply responsive margins before measuring
+    cards.forEach((card, i) => {
+      if (i < cards.length - 1) card.style.marginBottom = `${itemDistance}px`;
+    });
 
     // Reset transforms to get true offsets
     cards.forEach(card => { card.style.transform = 'none'; card.style.filter = 'none'; });
@@ -125,7 +132,7 @@ mm.add("(max-width: 900px)", () => {
         triggerStart: cards[i].offsetTop - stackPositionPx - (itemStackDistance * i),
         triggerEnd: cards[i].offsetTop - scaleEndPositionPx,
         pinStart: cards[i].offsetTop - stackPositionPx - (itemStackDistance * i),
-        pinEnd: endTop - (scroller.clientHeight / 2)
+        pinEnd: endTop - scroller.clientHeight
       };
     }
 
@@ -148,7 +155,12 @@ mm.add("(max-width: 900px)", () => {
 
       const scaleProgress = calculateProgress(scrollTop, data.triggerStart, data.triggerEnd);
       const targetScale = baseScale + i * itemScale;
-      const scale = 1 - scaleProgress * (1 - targetScale);
+      let scale = 1 - scaleProgress * (1 - targetScale);
+
+      // Make sure the last card stays full size when it comes into the stack
+      if (i === cards.length - 1) {
+        scale = 1;
+      }
 
       let translateY = 0;
       const isPinned = scrollTop >= data.pinStart && scrollTop <= data.pinEnd;
@@ -164,7 +176,6 @@ mm.add("(max-width: 900px)", () => {
   }
 
   cards.forEach((card, i) => {
-    if (i < cards.length - 1) card.style.marginBottom = `${itemDistance}px`;
     card.style.willChange = 'transform, filter';
     card.style.transformOrigin = 'top center';
     card.style.backfaceVisibility = 'hidden';
@@ -180,8 +191,37 @@ mm.add("(max-width: 900px)", () => {
     easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
     smoothWheel: true,
   });
+  let scrollThrottle = false;
 
-  scrollerLenis.on('scroll', updateCardTransforms);
+  scrollerLenis.on('scroll', (e) => {
+    updateCardTransforms();
+
+    // Auto-scroll to the next section after completing the card stack
+    if (e.progress > 0.98 && e.direction === 1) {
+      if (!scrollThrottle) {
+        scrollThrottle = true;
+        lenis.scrollTo('#performance', {
+          duration: 2.5,
+          easing: (t) => t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2 // easeInOutCubic
+        });
+        setTimeout(() => { scrollThrottle = false; }, 3000);
+      }
+    }
+  });
+
+  // Fallback: If progress is already at max and user keeps scrolling down
+  scroller.addEventListener('wheel', (e) => {
+    if (e.deltaY > 0 && scrollerLenis.progress > 0.98) {
+      if (!scrollThrottle) {
+        scrollThrottle = true;
+        lenis.scrollTo('#performance', {
+          duration: 2.5,
+          easing: (t) => t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2 // easeInOutCubic
+        });
+        setTimeout(() => { scrollThrottle = false; }, 3000);
+      }
+    }
+  });
 
   function rafScroller(time) {
     scrollerLenis.raf(time);
@@ -193,8 +233,9 @@ mm.add("(max-width: 900px)", () => {
   setTimeout(updateMetrics, 50);
 
   // Slide in Scroll Stack on load
+  const isMobileView = window.innerWidth <= 900;
   gsap.fromTo(scroller,
-    { opacity: 0, x: 80 },
+    { opacity: 0, x: isMobileView ? 0 : 80 },
     { opacity: 1, x: 0, duration: 1.4, ease: 'power3.out', delay: 0.6 }
   );
 })();
@@ -207,7 +248,7 @@ floatElements.forEach((el, index) => {
     y: '-15px',
     duration: 2 + index * 0.5, // Randomize duration slightly
     yoyo: true,
-    repeat: -1,
+    repeat: (el.classList.contains('floating-mockup')) ? 0 : -1, // Stop floating if it's the hero mockup
     ease: 'sine.inOut',
     delay: index * 0.2
   });
