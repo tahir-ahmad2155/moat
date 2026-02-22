@@ -71,59 +71,133 @@ if (heroLines.length === 3) {
     );
 }
 
-tl.to('.hero-subtitle', {
-  opacity: 1,
-  y: 0,
-  duration: 1,
-  ease: 'power3.out'
-})
-  .to('.hero-cta', {
-    opacity: 1,
-    y: 0,
-    duration: 1,
-    ease: 'power3.out'
+// ── Mobile Scroll Scale for Hero Title ──
+let mm = gsap.matchMedia();
+mm.add("(max-width: 900px)", () => {
+  gsap.to(".hero-title", {
+    scale: 4.5, // Drastically increased scale factor
+    opacity: 0, // Makes it fade out as it zooms toward the screen to look cinematic instead of just stretching infinitely
+    transformOrigin: "center center",
+    ease: "power2.inOut",
+    scrollTrigger: {
+      trigger: ".hero",
+      start: "top top",
+      end: "bottom top",
+      scrub: true
+    }
+  });
+});
+
+
+
+// ── Hero Scroll Stack Animation ──
+(function initScrollStack() {
+  const scroller = document.getElementById('heroScrollStack');
+  if (!scroller) return;
+
+  const cards = Array.from(scroller.querySelectorAll('.scroll-stack-card'));
+  const endElement = scroller.querySelector('.scroll-stack-end');
+
+  // Configuration (matches user's screenshot proportions)
+  const itemDistance = 100;
+  const itemScale = 0.05;
+  const itemStackDistance = 45;
+  const baseScale = 0.80;
+
+  let stackPositionPx;
+  let scaleEndPositionPx;
+
+  // Track each card's un-transformed layout positions so they don't shift during transform.
+  const cardsData = [];
+
+  function updateMetrics() {
+    stackPositionPx = scroller.clientHeight * 0.35;
+    scaleEndPositionPx = scroller.clientHeight * 0.25;
+
+    // Reset transforms to get true offsets
+    cards.forEach(card => { card.style.transform = 'none'; card.style.filter = 'none'; });
+
+    const endTop = endElement.offsetTop;
+
+    for (let i = 0; i < cards.length; i++) {
+      cardsData[i] = {
+        offsetTop: cards[i].offsetTop,
+        triggerStart: cards[i].offsetTop - stackPositionPx - (itemStackDistance * i),
+        triggerEnd: cards[i].offsetTop - scaleEndPositionPx,
+        pinStart: cards[i].offsetTop - stackPositionPx - (itemStackDistance * i),
+        pinEnd: endTop - (scroller.clientHeight / 2)
+      };
+    }
+
+    // re-apply
+    updateCardTransforms();
+  }
+
+  function calculateProgress(scrollTop, start, end) {
+    if (scrollTop < start) return 0;
+    if (scrollTop > end) return 1;
+    return (scrollTop - start) / (end - start);
+  }
+
+  function updateCardTransforms() {
+    const scrollTop = scroller.scrollTop;
+
+    cards.forEach((card, i) => {
+      const data = cardsData[i];
+      if (!data) return;
+
+      const scaleProgress = calculateProgress(scrollTop, data.triggerStart, data.triggerEnd);
+      const targetScale = baseScale + i * itemScale;
+      const scale = 1 - scaleProgress * (1 - targetScale);
+
+      let translateY = 0;
+      const isPinned = scrollTop >= data.pinStart && scrollTop <= data.pinEnd;
+
+      if (isPinned) {
+        translateY = scrollTop - data.offsetTop + stackPositionPx + itemStackDistance * i;
+      } else if (scrollTop > data.pinEnd) {
+        translateY = data.pinEnd - data.offsetTop + stackPositionPx + itemStackDistance * i;
+      }
+
+      card.style.transform = `translate3d(0, ${translateY}px, 0) scale(${scale})`;
+    });
+  }
+
+  cards.forEach((card, i) => {
+    if (i < cards.length - 1) card.style.marginBottom = `${itemDistance}px`;
+    card.style.willChange = 'transform, filter';
+    card.style.transformOrigin = 'top center';
+    card.style.backfaceVisibility = 'hidden';
   });
 
-// ── Hero Card 3D Tilt ──
-const heroCardWrap = document.getElementById('heroCardWrap');
-const heroCardTilt = document.getElementById('heroCardTilt');
+  window.addEventListener('resize', updateMetrics);
 
-if (heroCardWrap && heroCardTilt) {
-  // Slide in card on load
-  gsap.fromTo(heroCardTilt,
-    { opacity: 0, x: 80, rotateY: -25 },
-    { opacity: 1, x: 0, rotateY: 0, duration: 1.4, ease: 'power3.out', delay: 0.6 }
+  // Local lenis for the scroller
+  const scrollerLenis = new Lenis({
+    wrapper: scroller,
+    content: scroller.querySelector('.scroll-stack-inner'),
+    duration: 1.2,
+    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+    smoothWheel: true,
+  });
+
+  scrollerLenis.on('scroll', updateCardTransforms);
+
+  function rafScroller(time) {
+    scrollerLenis.raf(time);
+    requestAnimationFrame(rafScroller);
+  }
+  requestAnimationFrame(rafScroller);
+
+  // initialization delay to make sure CSS is loaded before calculating offsets
+  setTimeout(updateMetrics, 50);
+
+  // Slide in Scroll Stack on load
+  gsap.fromTo(scroller,
+    { opacity: 0, x: 80 },
+    { opacity: 1, x: 0, duration: 1.4, ease: 'power3.out', delay: 0.6 }
   );
-
-  // 3D tilt on mouse move
-  heroCardWrap.addEventListener('mousemove', (e) => {
-    const rect = heroCardWrap.getBoundingClientRect();
-    const cx = rect.left + rect.width / 2;
-    const cy = rect.top + rect.height / 2;
-    const rx = ((e.clientY - cy) / rect.height) * -22;
-    const ry = ((e.clientX - cx) / rect.width) * 22;
-
-    gsap.to(heroCardTilt, {
-      rotateX: rx,
-      rotateY: ry,
-      duration: 0.4,
-      ease: 'power2.out',
-      overwrite: 'auto',
-      transformPerspective: 1000,
-    });
-  });
-
-  // Spring back on mouse leave
-  heroCardWrap.addEventListener('mouseleave', () => {
-    gsap.to(heroCardTilt, {
-      rotateX: 0,
-      rotateY: 0,
-      duration: 1.2,
-      ease: 'elastic.out(1, 0.4)',
-      overwrite: 'auto',
-    });
-  });
-}
+})();
 
 
 const floatElements = document.querySelectorAll('.float-card, .feature-panel, .floating-mockup');
@@ -231,16 +305,24 @@ if (laptopScene && laptop) {
 
 const bgTexts = document.querySelectorAll('.bg-text');
 bgTexts.forEach(bg => {
-  gsap.to(bg, {
-    y: 180,
-    ease: 'none',
-    scrollTrigger: {
-      trigger: bg.parentElement,
-      start: 'top bottom',
-      end: 'bottom top',
-      scrub: true
+  // Inform GSAP to treat this element's centering strictly as percentages 
+  // to avoid pixel conversion bugs on responsive resize
+  gsap.set(bg, { xPercent: -50, yPercent: -50 });
+
+  // Parallax shift crossing exactly through 0 for perfect centering
+  gsap.fromTo(bg,
+    { y: -150 },
+    {
+      y: 150,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: bg.parentElement,
+        start: 'top bottom',
+        end: 'bottom top',
+        scrub: true
+      }
     }
-  });
+  );
 });
 
 // Horizontal Scroll Section
@@ -279,5 +361,17 @@ if (hero && mockup) {
       duration: 1,
       ease: 'power2.out'
     });
+  });
+}
+
+// Nav glassmorphism on scroll
+const nav = document.querySelector('.nav');
+if (nav) {
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 50) {
+      nav.classList.add('nav-scrolled');
+    } else {
+      nav.classList.remove('nav-scrolled');
+    }
   });
 }

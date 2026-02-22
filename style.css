@@ -81,6 +81,16 @@ h6 {
     align-items: center;
     /* Removed mix-blend-mode to preserve gold color */
     color: var(--text-primary);
+    transition: padding 0.4s ease, background 0.4s ease, backdrop-filter 0.4s ease, box-shadow 0.4s ease;
+}
+
+.nav.nav-scrolled {
+    padding: 1rem 5%;
+    background: rgba(214, 209, 200, 0.85);
+    /* var(--bg-primary) offset */
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
 }
 
 .nav-container {
@@ -984,6 +994,7 @@ h6 {
     min-height: 100vh;
     display: flex;
     align-items: center;
+    overflow: hidden;
 }
 
 .bg-text {
@@ -993,12 +1004,10 @@ h6 {
     transform: translate(-50%, -50%);
     font-size: clamp(4rem, 15vw, 18rem);
     font-weight: 800;
-    color: rgba(0, 0, 0, 0.08);
+    color: rgba(0, 0, 0, 0.03);
     pointer-events: none;
     z-index: 0;
     white-space: nowrap;
-    text-align: center;
-    width: 100%;
 }
 
 .feature-panel {
@@ -1590,5 +1599,75 @@ h6 {
 
     .arch-header {
         text-align: left;
+    }
+}
+
+/* Scroll Stack CSS */
+.scroll-stack-scroller {
+    position: relative;
+    width: clamp(600px, 85vw, 1400px);
+    height: 90vh;
+    overflow-y: auto;
+    overflow-x: visible;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: auto;
+    /* Managed by local Lenis if we wish, or 6native */
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    will-change: scroll-position;
+    z-index: 2;
+    margin-top: -25vh;
+    scrollbar-width: none;
+}
+
+.scroll-stack-scroller::-webkit-scrollbar {
+    display: none;
+}
+
+.scroll-stack-inner {
+    padding: 5vh 2rem 50vh;
+    min-height: 150vh;
+    /* gives room to scroll */
+}
+
+.scroll-stack-card-wrapper {
+    position: relative;
+}
+
+.scroll-stack-card {
+    transform-origin: top center;
+    will-change: transform, filter;
+    backface-visibility: hidden;
+    transform-style: preserve-3d;
+    aspect-ratio: 1.586;
+    height: auto;
+    width: 100%;
+    margin: 30px 0;
+    box-sizing: border-box;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.15));
+}
+
+.scroll-stack-card p {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+}
+
+.scroll-stack-end {
+    width: 100%;
+    height: 1px;
+}
+
+@media (max-width: 900px) {
+    .scroll-stack-scroller {
+        width: 100%;
+        height: 60vh;
+        margin-top: 2rem;
     }
 }
