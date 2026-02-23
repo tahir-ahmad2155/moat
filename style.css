@@ -311,15 +311,27 @@ h6 {
 
     .hero-title {
         text-align: center;
-        font-size: clamp(2rem, 10vw, 3.5rem);
+        font-size: clamp(3rem, 15vw, 7.5rem);
+        line-height: 0.85;
         width: 100%;
     }
 
     .hero-line {
         right: 0;
         left: 0;
+        margin: 0;
         width: 100%;
         text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        line-height: 0.85;
+        gap: 0.15em;
+    }
+
+    .hero-line:not(:first-child) {
+        margin-top: -0.5rem;
     }
 
     .hero-card-img {
@@ -1493,7 +1505,26 @@ h6 {
     }
 
     .hero-title {
-        font-size: clamp(2.5rem, 10vw, 4rem);
+        font-size: clamp(3rem, 15vw, 7.5rem);
+        line-height: 0.85;
+        text-align: center !important;
+    }
+
+    .hero-line {
+        right: 0;
+        left: 0;
+        margin: 0;
+        text-align: center !important;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        line-height: 0.85;
+        gap: 0.15em;
+    }
+
+    .hero-line:not(:first-child) {
+        margin-top: -0.5rem;
     }
 
     .split-layout {
