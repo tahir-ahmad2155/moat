@@ -41,7 +41,7 @@ tl.to('body', {
 // ── Cinematic Hero Title Reveal ──
 const heroLines = gsap.utils.toArray('.hero-line');
 if (heroLines.length === 3) {
-  gsap.timeline({ delay: 0.8 }) // Removed repeat to stop on the last line
+  gsap.timeline({ delay: 0.8, repeat: -1 }) // Added repeat for looping
 
     // Line 1: slide in from RIGHT → hold → fade out left
     .fromTo(heroLines[0],
@@ -61,10 +61,13 @@ if (heroLines.length === 3) {
       { opacity: 0, x: -50, duration: 0.7, ease: 'power2.in' }, '+=0.8'
     )
 
-    // Line 3: slide in from LEFT → hold (animation stops here, last text stays visible)
+    // Line 3: slide in from LEFT → hold → fade out right
     .fromTo(heroLines[2],
       { opacity: 0, x: -90 },
       { opacity: 1, x: 0, duration: 1.1, ease: 'power3.out' }
+    )
+    .to(heroLines[2],
+      { opacity: 0, x: 50, duration: 0.7, ease: 'power2.in' }, '+=0.8'
     );
 }
 
