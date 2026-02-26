@@ -35,41 +35,43 @@ tl.to('body', {
   opacity: 1,
   duration: 1.5,
   ease: 'power2.out'
-})
-  ;
+});
 
-// ── Cinematic Hero Title Reveal ──
-const heroLines = gsap.utils.toArray('.hero-line');
-if (heroLines.length === 3) {
-  gsap.timeline({ delay: 0.8, repeat: -1 }) // Added repeat for looping
+// ── New Layout Entrance Animations ──
+const titleTl = gsap.timeline({ repeat: -1 });
 
-    // Line 1: slide in from RIGHT → hold → fade out left
-    .fromTo(heroLines[0],
-      { opacity: 0, x: 90 },
-      { opacity: 1, x: 0, duration: 0.9, ease: 'power3.out' }
-    )
-    .to(heroLines[0],
-      { opacity: 0, x: -50, duration: 0.7, ease: 'power2.in' }, '+=0.8'
-    )
+gsap.utils.toArray(".hero-line-ref").forEach((line, index) => {
+  // first line enters left to right, second right to left, third left to right
+  const isLeftToRight = (index % 2 === 0);
+  const startX = isLeftToRight ? -50 : 50;
+  const exitX = isLeftToRight ? 50 : -50;
 
-    // Line 2: slide in from RIGHT → hold → fade out left
-    .fromTo(heroLines[1],
-      { opacity: 0, x: 90 },
-      { opacity: 1, x: 0, duration: 0.9, ease: 'power3.out' }
-    )
-    .to(heroLines[1],
-      { opacity: 0, x: -50, duration: 0.7, ease: 'power2.in' }, '+=0.8'
-    )
-
-    // Line 3: slide in from LEFT → hold → fade out right
-    .fromTo(heroLines[2],
-      { opacity: 0, x: -90 },
-      { opacity: 1, x: 0, duration: 1.1, ease: 'power3.out' }
-    )
-    .to(heroLines[2],
-      { opacity: 0, x: 50, duration: 0.7, ease: 'power2.in' }, '+=0.8'
+  titleTl.fromTo(line,
+    { opacity: 0, x: startX, y: 0 },
+    { opacity: 1, x: 0, duration: 1.0, ease: "power3.out" }
+  )
+    .to(line,
+      { opacity: 0, x: exitX, duration: 1.0, ease: "power3.in" },
+      "+=1.2" // holds on screen for 1.2 seconds before fading out
     );
-}
+});
+
+gsap.from(".hero-right-ref", {
+  x: 80,
+  opacity: 0,
+  duration: 1.4,
+  ease: "power3.out",
+  delay: 0.5
+});
+
+gsap.to(".ref-card", {
+  y: "-15px",
+  duration: 2.5,
+  yoyo: true,
+  repeat: -1,
+  ease: "sine.inOut",
+  stagger: 0.5
+});
 
 // ── Mobile Scroll Scale for Hero Title ──
 let mm = gsap.matchMedia();
@@ -203,7 +205,7 @@ mm.add("(max-width: 900px)", () => {
     if (e.progress > 0.98 && e.direction === 1) {
       if (!scrollThrottle) {
         scrollThrottle = true;
-        lenis.scrollTo('#performance', {
+        lenis.scrollTo('#services', {
           duration: 2.5,
           easing: (t) => t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2 // easeInOutCubic
         });
@@ -217,7 +219,7 @@ mm.add("(max-width: 900px)", () => {
     if (e.deltaY > 0 && scrollerLenis.progress > 0.98) {
       if (!scrollThrottle) {
         scrollThrottle = true;
-        lenis.scrollTo('#performance', {
+        lenis.scrollTo('#services', {
           duration: 2.5,
           easing: (t) => t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2 // easeInOutCubic
         });
@@ -261,6 +263,7 @@ floatElements.forEach((el, index) => {
 const sections = document.querySelectorAll('section:not(.hero)');
 
 sections.forEach(section => {
+  // Existing animation for h2, p, stat-card (bottom to top)
   gsap.fromTo(section.querySelectorAll('h2, p, .stat-card'),
     {
       y: 50,
@@ -280,6 +283,27 @@ sections.forEach(section => {
       }
     }
   );
+
+  // New animation for bubbled text (left to right)
+  gsap.fromTo(section.querySelectorAll('.perf-list-item, .bubbly-point'),
+    {
+      x: -100,
+      opacity: 0
+    },
+    {
+      x: 0,
+      opacity: 1,
+      duration: 1,
+      stagger: 0.2,
+      ease: 'power3.out',
+      scrollTrigger: {
+        trigger: section,
+        start: 'top 80%',
+        end: 'top 20%',
+        toggleActions: 'play none none reverse'
+      }
+    }
+  );
 });
 
 // ── Cinematic Laptop Animation ──
@@ -287,10 +311,10 @@ const laptopLid = document.getElementById('laptopLid');
 const laptopScene = document.getElementById('laptopScene');
 const laptop = document.getElementById('laptop');
 
-// Open lid when performance section scrolls into view
+// Open lid when services section scrolls into view
 if (laptopLid) {
   ScrollTrigger.create({
-    trigger: '#performance',
+    trigger: '#services',
     start: 'top 60%',
     onEnter: () => {
       setTimeout(() => laptopLid.classList.add('open'), 400);
@@ -419,3 +443,10 @@ if (nav) {
     }
   });
 }
+// Case Study Flip Logic
+document.querySelectorAll('.scroll-panel').forEach(panel => {
+  panel.addEventListener('click', (e) => {
+    // Only toggle if the click isn't on a standard link (if any were present)
+    panel.classList.toggle('flipped');
+  });
+});
