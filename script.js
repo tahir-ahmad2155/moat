@@ -37,31 +37,14 @@ tl.to('body', {
   ease: 'power2.out'
 });
 
-// ── New Layout Entrance Animations ──
-const titleTl = gsap.timeline({ repeat: -1 });
-
-gsap.utils.toArray(".hero-line-ref").forEach((line, index) => {
-  // first line enters left to right, second right to left, third left to right
-  const isLeftToRight = (index % 2 === 0);
-  const startX = isLeftToRight ? -50 : 50;
-  const exitX = isLeftToRight ? 50 : -50;
-
-  titleTl.fromTo(line,
-    { opacity: 0, x: startX, y: 0 },
-    { opacity: 1, x: 0, duration: 1.0, ease: "power3.out" }
-  )
-    .to(line,
-      { opacity: 0, x: exitX, duration: 1.0, ease: "power3.in" },
-      "+=1.2" // holds on screen for 1.2 seconds before fading out
-    );
-});
-
-gsap.from(".hero-right-ref", {
-  x: 80,
+// ── New Centered Hero Logo Entrance Animation ──
+gsap.from(".hero-center-logo", {
+  scale: 0.9,
+  y: 30,
   opacity: 0,
-  duration: 1.4,
+  duration: 1.8,
   ease: "power3.out",
-  delay: 0.5
+  delay: 0.2
 });
 
 gsap.to(".ref-card", {
@@ -205,7 +188,7 @@ mm.add("(max-width: 900px)", () => {
     if (e.progress > 0.98 && e.direction === 1) {
       if (!scrollThrottle) {
         scrollThrottle = true;
-        lenis.scrollTo('#services', {
+        lenis.scrollTo('#offerings', {
           duration: 2.5,
           easing: (t) => t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2 // easeInOutCubic
         });
@@ -219,7 +202,7 @@ mm.add("(max-width: 900px)", () => {
     if (e.deltaY > 0 && scrollerLenis.progress > 0.98) {
       if (!scrollThrottle) {
         scrollThrottle = true;
-        lenis.scrollTo('#services', {
+        lenis.scrollTo('#offerings', {
           duration: 2.5,
           easing: (t) => t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2 // easeInOutCubic
         });
@@ -314,8 +297,8 @@ const laptop = document.getElementById('laptop');
 // Open lid when services section scrolls into view
 if (laptopLid) {
   ScrollTrigger.create({
-    trigger: '#services',
-    start: 'top 60%',
+    trigger: laptopScene,
+    start: 'top 80%',
     onEnter: () => {
       setTimeout(() => laptopLid.classList.add('open'), 400);
     },

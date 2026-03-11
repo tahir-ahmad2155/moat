@@ -6,13 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Moat - Elite Financial Services</title>
     <!-- Favicon -->
-    <link rel="icon" type="image/png" href="assets/logo musite.png">
+    <link rel="icon" type="image/png" href="assets/msuite logo.png">
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;0,800;0,900;1,700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Didact+Gothic&display=swap"
         rel="stylesheet">
 
     <!-- Styles -->
@@ -30,15 +30,10 @@
     <!-- Navigation -->
     <nav class="nav">
         <div class="nav-container">
-            <div class="logo">
-                <a href="#what-is-msuite">
-                    <img src="assets/logo musite.png" alt="Msuite">
-                </a>
-            </div>
+
             <div class="nav-links">
                 <a href="#hero">Home</a>
                 <a href="#service">We Serve</a>
-                <a href="#services">Services</a>
                 <a href="#horizontal">Case Studies</a>
                 <a href="#final" class="nav-cta">Contact</a>
             </div>
@@ -46,65 +41,24 @@
     </nav>
 
     <!-- Hero Section -->
-    <section class="hero hero-ref" id="hero">
-        <div class="star-group">
+    <section class="hero hero-ref" id="hero"
+        style="background-image: url('assets/hero section backround (1).jpeg'); background-size: cover; background-position: center; flex-direction: column; justify-content: center; align-items: center; position: relative;">
+        <!-- Dark Overlay for readability -->
+        <div class="hero-overlay"
+            style="position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(7, 7, 7, 0.4) 0%, rgba(7, 7, 7, 0.6) 100%); z-index: 1;">
+        </div>
+
+        <div class="star-group" style="z-index: 2;">
             <span class="star s1">✦</span>
             <span class="star s2">✦</span>
             <span class="star s3">✦</span>
             <span class="star s4">✦</span>
         </div>
 
-        <div class="hero-left-ref">
-            <h1 class="hero-title-ref"
-                style="font-family: 'Inter', sans-serif; font-size: clamp(4.5rem, 8vw, 8rem); line-height: 1.2; font-weight: 800; margin: 0; color: #D4A674; position: relative; height: 2.5em;">
-                <span class="hero-line-ref" style="position:absolute; top:0; left:0; opacity:0;"><span
-                        style="color: #ffffff;">Unified</span><br>Strategy</span>
-                <span class="hero-line-ref" style="position:absolute; top:0; left:0; opacity:0;"><span
-                        style="color: #ffffff;">Institutional</span><br>Oversight</span>
-                <span class="hero-line-ref" style="position:absolute; top:0; left:0; opacity:0;"><span
-                        style="color: #ffffff;">Sustainable</span><br>Legacy</span>
-            </h1>
-        </div>
-
-        <div class="hero-right-ref">
-            <div class="cards-3d-wrap"
-                style="display: flex; justify-content: center; align-items: center; transform: translateX(12vw);">
-                <img src="assets/cards hand.png?v=7" class="ref-card" alt="Cards Hand"
-                    style="width: clamp(250px, 40vw, 600px); filter: drop-shadow(0 20px 40px rgba(0,0,0,0.3)); -webkit-mask-image: radial-gradient(circle at center, rgba(0,0,0,1) 50%, rgba(0,0,0,0) 95%); mask-image: radial-gradient(circle at center, rgba(0,0,0,1) 50%, rgba(0,0,0,0) 95%);">
-            </div>
-
-            <div class="hero-bottom-right-ref">
-                <div class="stat-badge-ref">
-                    <svg viewBox="0 0 100 100" class="badge-text" width="100" height="100">
-                        <defs>
-                            <path id="circlePath" d="M 50, 50 m -35, 0 a 35,35 0 1,1 70,0 a 35,35 0 1,1 -70,0" />
-                        </defs>
-                        <text fill="#ffffff" font-size="11" letter-spacing="1.5" font-family="Inter, sans-serif">
-                            <textPath href="#circlePath" startOffset="50%" text-anchor="middle">banking solution your
-                                one stop</textPath>
-                        </text>
-                    </svg>
-                    <div class="badge-icon">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" class="badge-icon-svg"
-                            stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                            <polyline points="20 6 9 17 4 12"></polyline>
-                        </svg>
-                    </div>
-                </div>
-
-                <div class="stat-users-ref">
-                    <div class="users-top-row">
-                        <div class="user-count-ref">250+</div>
-                        <div class="faces-stack">
-                            <div class="face-circle f1" style="background:#555;"></div>
-                            <div class="face-circle f2" style="background:#777;"></div>
-                            <div class="face-circle f3" style="background:#999;"></div>
-                            <div class="face-circle f-plus">+</div>
-                        </div>
-                    </div>
-                    <div class="user-desc-ref">World Wide User</div>
-                </div>
-            </div>
+        <div class="hero-content"
+            style="z-index: 2; display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%;">
+            <img src="assets/msuite logo.png" alt="Msuite Logo" class="hero-center-logo"
+                style="width: clamp(200px, 30vw, 400px); object-fit: contain; filter: drop-shadow(0 0 20px rgba(0,0,0,0.5));">
         </div>
     </section>
 
@@ -115,15 +69,12 @@
         <div class="container">
             <div style="text-align: center; margin: 0 auto; max-width: 800px; position: relative; z-index: 1;">
                 <h2 class="section-title fade-in-text">
-                    <span class="title-dark" style="color: #fff;">Why</span>
-                    <span class="title-muted" style="color: var(--text-gold);">MSuite?</span>
+                    <span class="title-dark" style="color: #fff;">MSuite</span>
                 </h2>
                 <p style="color: #a0a0a0; font-size: 1.2rem; line-height: 1.8; margin-top: 2rem;">
-                    <strong>MSuite</strong> is an advanced, AI-powered institutional wealth management and digital
-                    payment solution.
-                    It bridges the gap between traditional banking security and modern financial technology.
-                    With MSuite, you can manage assets, secure investments, and execute digital payments seamlessly
-                    through our state-of-the-art predictive analytics engine and real-time risk monitoring.
+                    Affluent and NRI families don't suffer from a lack of money. They suffer from fragmentation,
+                    complexity, and the absence of coordination. <strong>Msuite</strong> exists to change that —
+                    bringing institutional-grade structure, visibility, and governance to family wealth.
                 </p>
             </div>
         </div>
@@ -138,7 +89,7 @@
             <!-- Intro Statement -->
             <div style="text-align: center; margin: 0 auto; max-width: 800px; position: relative; z-index: 1;">
                 <h2 class="section-title fade-in-text">
-                    <span class="title-dark" style="color: #fff;">Who We</span>
+                    <span class="title-dark" style="color: #fff;">We</span>
                     <span class="title-muted" style="color: var(--text-gold);">Serve</span>
                 </h2>
                 <p style="color: #a0a0a0; font-size: 1.2rem; line-height: 1.8; margin-top: 2rem;">
@@ -295,184 +246,13 @@
     </section>
 
     <!-- Services Section -->
-    <section class="performance" id="services">
-        <div class="bg-text">SERVICES</div>
-        <div class="perf-particles" id="perfParticles"></div>
-        <span class="section-label">Services</span>
-        <div class="container perf-layout">
-
-            <!-- Left: Text -->
-            <div class="perf-text">
-                <h2 class="section-title fade-in-text">
-                    <span class="title-dark">Power.</span>
-                    <span class="title-muted" style="color: var(--text-gold);">Refined.</span>
-                </h2>
-                <style>
-                    .bubbly-point {
-                        display: flex;
-                        align-items: center;
-                        gap: 1.2rem;
-                        font-family: var(--font-family);
-                        font-size: clamp(1rem, 1.2vw, 1.1rem);
-                        background: rgba(255, 255, 255, 0.02);
-                        border: 1px solid rgba(255, 255, 255, 0.03);
-                        border-radius: 50px;
-                        padding: 0.8rem 1.8rem;
-                        backdrop-filter: blur(12px);
-                        -webkit-backdrop-filter: blur(12px);
-                        width: fit-content;
-                        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-                        transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-                    }
-
-                    .bubbly-point:hover {
-                        background: rgba(255, 255, 255, 0.06);
-                        border-color: rgba(212, 166, 116, 0.4);
-                        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4), inset 0 0 20px rgba(212, 166, 116, 0.05);
-                        transform: translateY(-3px);
-                    }
-                </style>
-                <div class="stats-grid" style="display: flex; flex-direction: column; gap: 1.2rem; max-width: 100%;">
-                    <!-- Point 1 -->
-                    <div class="perf-list-item bubbly-point">
-                        <span style="color: #ffffff; min-width: max-content;"><strong
-                                style="color: var(--text-gold); font-weight: 800; font-size: 1.2em; margin-right: 1px;">m</strong><span
-                                style="font-weight: 500;">Capital</span></span>
-                        <span style="color: rgba(255,255,255,0.4); font-size: 0.9em;">→</span>
-                        <span style="color: var(--text-secondary); font-weight: 300;">Investment Solutions</span>
-                    </div>
-
-                    <!-- Point 2 -->
-                    <div class="perf-list-item delay-1 bubbly-point">
-                        <span style="color: #ffffff; min-width: max-content;"><strong
-                                style="color: var(--text-gold); font-weight: 800; font-size: 1.2em; margin-right: 1px;">m</strong><span
-                                style="font-weight: 500;">Structure</span></span>
-                        <span style="color: rgba(255,255,255,0.4); font-size: 0.9em;">→</span>
-                        <span style="color: var(--text-secondary); font-weight: 300;">Asset Restructuring &
-                            Consolidation</span>
-                    </div>
-
-                    <!-- Point 3 -->
-                    <div class="perf-list-item delay-2 bubbly-point">
-                        <span style="color: #ffffff; min-width: max-content;"><strong
-                                style="color: var(--text-gold); font-weight: 800; font-size: 1.2em; margin-right: 1px;">m</strong><span
-                                style="font-weight: 500;">Continuum</span></span>
-                        <span style="color: rgba(255,255,255,0.4); font-size: 0.9em;">→</span>
-                        <span style="color: var(--text-secondary); font-weight: 300;">Legacy & Succession
-                            Planning</span>
-                    </div>
-
-                    <!-- Point 4 -->
-                    <div class="perf-list-item delay-3 bubbly-point">
-                        <span style="color: #ffffff; min-width: max-content;"><strong
-                                style="color: var(--text-gold); font-weight: 800; font-size: 1.2em; margin-right: 1px;">m</strong><span
-                                style="font-weight: 500;">Advisory</span></span>
-                        <span style="color: rgba(255,255,255,0.4); font-size: 0.9em;">→</span>
-                        <span style="color: var(--text-secondary); font-weight: 300;">Legal & Tax Advisory</span>
-                    </div>
-
-                    <!-- Point 5 -->
-                    <div class="perf-list-item delay-4 bubbly-point">
-                        <span style="color: #ffffff; min-width: max-content;"><strong
-                                style="color: var(--text-gold); font-weight: 800; font-size: 1.2em; margin-right: 1px;">m</strong><span
-                                style="font-weight: 500;">Borderless</span></span>
-                        <span style="color: rgba(255,255,255,0.4); font-size: 0.9em;">→</span>
-                        <span style="color: var(--text-secondary); font-weight: 300;">NRI & Global Solutions</span>
-                    </div>
-
-                    <!-- Point 6 -->
-                    <div class="perf-list-item delay-5 bubbly-point">
-                        <span style="color: #ffffff; min-width: max-content;"><strong
-                                style="color: var(--text-gold); font-weight: 800; font-size: 1.2em; margin-right: 1px;">m</strong><span
-                                style="font-weight: 500;">Console</span></span>
-                        <span style="color: rgba(255,255,255,0.4); font-size: 0.9em;">→</span>
-                        <span style="color: var(--text-secondary); font-weight: 300;">Integrated Wealth Interface</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Right: Cinematic Laptop -->
-            <div class="perf-visual">
-                <div class="laptop-scene" id="laptopScene">
-                    <div class="laptop" id="laptop">
-                        <!-- Lid -->
-                        <div class="laptop-lid" id="laptopLid">
-                            <div class="laptop-screen">
-                                <div class="screen-glow"></div>
-                                <div class="screen-content">
-                                    <!-- Header -->
-                                    <div class="sc-header">
-                                        <span class="sc-ticker">MOAT Portfolio</span>
-                                        <span class="sc-live">● LIVE</span>
-                                    </div>
-                                    <!-- Price -->
-                                    <div class="sc-price">
-                                        <span class="sc-val">$2,847,392</span>
-                                        <span class="sc-change">▲ +12.4%</span>
-                                    </div>
-                                    <!-- SVG Line Chart -->
-                                    <div class="sc-chart-wrap">
-                                        <svg viewBox="0 0 300 75" preserveAspectRatio="none" class="sc-svg">
-                                            <defs>
-                                                <linearGradient id="chartGrad" x1="0" y1="0" x2="0" y2="1">
-                                                    <stop offset="0%" stop-color="#D4A674" stop-opacity="0.45" />
-                                                    <stop offset="100%" stop-color="#D4A674" stop-opacity="0" />
-                                                </linearGradient>
-                                            </defs>
-                                            <path class="sc-area"
-                                                d="M0,72 C15,70 30,62 50,54 C70,46 80,58 100,46 C120,34 135,40 155,26 C175,12 195,20 215,13 C235,6 260,14 300,4 L300,75 L0,75 Z" />
-                                            <path class="sc-line"
-                                                d="M0,72 C15,70 30,62 50,54 C70,46 80,58 100,46 C120,34 135,40 155,26 C175,12 195,20 215,13 C235,6 260,14 300,4" />
-                                            <circle class="sc-dot" cx="300" cy="4" r="3.5" />
-                                            <circle class="sc-dot-ring" cx="300" cy="4" r="6" />
-                                        </svg>
-                                    </div>
-                                    <!-- Bottom stats -->
-                                    <div class="sc-stats">
-                                        <div class="sc-stat">
-                                            <span class="sc-stat-l">AUM</span>
-                                            <span class="sc-stat-v">$2.4T</span>
-                                        </div>
-                                        <div class="sc-stat">
-                                            <span class="sc-stat-l">Return</span>
-                                            <span class="sc-stat-v">18.2%</span>
-                                        </div>
-                                        <div class="sc-stat">
-                                            <span class="sc-stat-l">Risk</span>
-                                            <span class="sc-stat-v sc-low">Low</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="screen-reflection"></div>
-                            </div>
-                            <div class="lid-back"></div>
-                        </div>
-                        <!-- Base -->
-                        <div class="laptop-base">
-                            <div class="keyboard-area">
-                                <div class="keyboard-row" style="--cols:14"></div>
-                                <div class="keyboard-row" style="--cols:13"></div>
-                                <div class="keyboard-row" style="--cols:12"></div>
-                                <div class="keyboard-row" style="--cols:11"></div>
-                            </div>
-                            <div class="trackpad"></div>
-                        </div>
-                        <!-- Shadow -->
-                        <div class="laptop-shadow"></div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </section>
-
     <!-- Offerings Section -->
     <section class="offerings" id="offerings">
         <div class="bg-text">OFFERINGS</div>
         <div class="container" style="text-align: center; position: relative; z-index: 1;">
             <span class="section-label">Our Offerings</span>
             <h2 class="section-title" style="margin-bottom: 2rem; font-size: clamp(3rem, 10vw, 8rem);">
-                What We <span style="color: var(--text-gold);">Offer</span>
+                We <span style="color: var(--text-gold);">Offer</span>
             </h2>
             <p
                 style="color: var(--text-secondary); max-width: 600px; margin: 0 auto 4rem auto; font-size: 1.1rem; line-height: 1.8;">
@@ -485,6 +265,8 @@
                 <div class="offering-slide"
                     style="background-image: url('assets/mcapital-bg.png'); background-size: cover; background-position: center;">
                     <div class="offering-content">
+                        <div class="offering-topic"><span class="topic-arrow">&raquo;</span> <span
+                                class="topic-m">m</span>Capital &rarr;</div>
                         <h3>Investment Solutions</h3>
                         <ul class="offering-list">
                             <li>Portfolio Management Services</li>
@@ -498,6 +280,8 @@
                 <div class="offering-slide"
                     style="background-image: url('assets/mstructure-bg.png'); background-size: cover; background-position: center;">
                     <div class="offering-content">
+                        <div class="offering-topic"><span class="topic-arrow">&raquo;</span> <span
+                                class="topic-m">m</span>Structure &rarr;</div>
                         <h3>Asset Restructuring & Consolidation</h3>
                         <ul class="offering-list">
                             <li>Restructuring & Consolidation of Scattered Assets across Banks, Advisors & Geographies
@@ -512,6 +296,8 @@
                 <div class="offering-slide"
                     style="background-image: url('assets/mcontinuum-bg.png'); background-size: cover; background-position: center;">
                     <div class="offering-content">
+                        <div class="offering-topic"><span class="topic-arrow">&raquo;</span> <span
+                                class="topic-m">m</span>Continuum &rarr;</div>
                         <h3>Estate, Legacy & Succession Planning</h3>
                         <ul class="offering-list">
                             <li>Family Trust Creation</li>
@@ -526,6 +312,8 @@
                 <div class="offering-slide"
                     style="background-image: url('assets/madvisory-bg.png'); background-size: cover; background-position: center;">
                     <div class="offering-content">
+                        <div class="offering-topic"><span class="topic-arrow">&raquo;</span> <span
+                                class="topic-m">m</span>Advisory &rarr;</div>
                         <h3>Tax & Legal Advisory</h3>
                         <ul class="offering-list">
                             <li>Integrated Tax Structuring</li>
@@ -539,6 +327,8 @@
                 <div class="offering-slide"
                     style="background-image: url('assets/mborderless-bg.png'); background-size: cover; background-position: center;">
                     <div class="offering-content">
+                        <div class="offering-topic"><span class="topic-arrow">&raquo;</span> <span
+                                class="topic-m">m</span>Borderless &rarr;</div>
                         <h3>NRI & Cross-border Solutions</h3>
                         <ul class="offering-list">
                             <li>Residency & Tax Transition Planning</li>
@@ -552,6 +342,8 @@
                 <div class="offering-slide"
                     style="background-image: url('assets/mconsole-bg.png'); background-size: cover; background-position: center;">
                     <div class="offering-content">
+                        <div class="offering-topic"><span class="topic-arrow">&raquo;</span> <span
+                                class="topic-m">m</span>Console &rarr;</div>
                         <h3>Wealth Console</h3>
                         <ul class="offering-list">
                             <li>Advanced wealth interface providing real-time analytics</li>
@@ -763,15 +555,19 @@
             <!-- Left Column -->
             <div class="footer-col footer-about">
                 <a href="#hero" class="footer-logo-link">
-                    <img src="assets/logo musite.png?v=4" alt="Msuite" class="footer-logo">
+                    <img src="assets/msuite logo.png?v=4" alt="Msuite" class="footer-logo">
                 </a>
-                <p>Shaping future leaders through AI-powered institutional wealth management and agency-based training.
+                <p>Let us bring structure, visibility, and purpose to your family's wealth — across every generation.
                 </p>
                 <div class="social-links">
-                    <a href="#">IG</a>
-                    <a href="#">FB</a>
-                    <a href="#">LN</a>
-                    <a href="#">YT</a>
+                    <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer"><img
+                            src="assets/instagram.jpeg" alt="Instagram"></a>
+                    <a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer"><img
+                            src="assets/facebook.jpeg" alt="Facebook"></a>
+                    <a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer"><img
+                            src="assets/linkedin.jpeg" alt="LinkedIn"></a>
+                    <a href="https://x.com/" target="_blank" rel="noopener noreferrer"><img src="assets/x.jpeg"
+                            alt="X"></a>
                 </div>
             </div>
 
@@ -779,7 +575,6 @@
             <div class="footer-col footer-links">
                 <h4>Quick Links</h4>
                 <ul>
-                    <li><a href="#services">Services</a></li>
                     <li><a href="#offerings">Offerings</a></li>
                     <li><a href="#architecture">Architecture</a></li>
                 </ul>
@@ -809,6 +604,9 @@
         </div>
         <div class="footer-bottom">
             <p>&copy; 2026 MOAT Investments. All rights reserved.</p>
+            <a href="https://www.instagram.com/intellex.web?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
+                class="dev-link" target="_blank" rel="noopener noreferrer">Meet the Developers <i
+                    class="fa-brands fa-instagram"></i></a>
         </div>
     </footer>
 
